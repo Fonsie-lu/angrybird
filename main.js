@@ -1,4 +1,4 @@
-const { Engine, World, Bodies, MouseConstraint, Mouse, Constraing } = Matter;
+const { Engine, World, Bodies, MouseConstraint, Mouse, Constraint } = Matter;
 let ground;
 const boxes = [];
 let bird;
@@ -12,7 +12,7 @@ let bkgImg;
 
 function preload() {
   dotImg = loadImage("images/dot.png");
-  botImg = loadImage("images/equals.png");
+  boxImg = loadImage("images/equals.png");
   bkgImg = loadImage("images/skyBackground.png");
 }
 
@@ -37,7 +37,7 @@ function setup() {
 
 function draw() {
   background(bkgImg);
-  Engine.update(engine);
+  Matter.Engine.update(engine);
   ground.show();
   for (box of boxes) {
     box.show();
@@ -55,7 +55,7 @@ function mouseReleased() {
 function keyPressed() {
   if (key == " ") {
     World.remove(world, bird.body);
-    slingshot.attatch(bird);
     bird = new Bird(150, 300, 25);
+    slingshot.attach(bird.body);
   }
 }
